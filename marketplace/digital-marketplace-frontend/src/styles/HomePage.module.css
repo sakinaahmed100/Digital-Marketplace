@@ -1,0 +1,82 @@
+/* General layout for the page */
+.homePage {
+    font-family: Arial, sans-serif;
+  }
+  
+
+  
+  .hero {
+    background-image: url('hero-bg.jpg'); /* Example image */
+    background-size: cover;
+    text-align: center;
+    color: rgb(255, 0, 0);
+    padding: 100px 0;
+  }
+  
+  .hero h1 {
+    font-size: 3em;
+  }
+  
+  .hero p {
+    font-size: 1.2em;
+    margin: 20px 0;
+  }
+  
+  .cta {
+    background-color: #f08a5d;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .howItWorks {
+    text-align: center;
+    margin: 50px 0;
+  }
+  
+  .steps {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .step {
+    width: 30%;
+  }
+  
+  .featuredMerch {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+    text-align: center;
+  }
+  
+  .productGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .product {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .benefits {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 0;
+  }
+  
+  .benefit {
+    width: 45%;
+  }
+  
+  .authPrompt {
+    text-align: center;
+    margin: 40px 0;
+  }
+  
+ 
