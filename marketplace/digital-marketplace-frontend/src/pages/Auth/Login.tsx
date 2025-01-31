@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/auth";
+import { login as loginUser } from "../../services/auth";
 import styles from "../../styles/Login.module.css"; // Using CSS Modules
 
 const Login: React.FC = () => {
@@ -9,11 +9,11 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login } = useAuth(); // Auth context function
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    setError(null); // Reset error
+    setError(null);
     if (!email || !password) {
       setError("All fields are required.");
       return;
@@ -21,13 +21,23 @@ const Login: React.FC = () => {
 
     try {
       setLoading(true);
-      const user = await login(email, password); // Call API
-      login(user.role); // Save role in AuthContext
+      const user = await loginUser(email, password); // Fetch from API
+
+      if (!user || !user.role) {
+        throw new Error("Invalid response from server.");
+      }
+
+      // Save role in context
+      login(user.role);
+
+      // Store tokens securely
+      localStorage.setItem("accessToken", user.access);
+      localStorage.setItem("refreshToken", user.refresh);
 
       // Redirect based on role
       navigate(user.role === "admin" ? "/admin/dashboard" : "/vendor/dashboard");
-    } catch (err) {
-      setError(err.message);
+    } catch (err: any) {
+      setError(err.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }

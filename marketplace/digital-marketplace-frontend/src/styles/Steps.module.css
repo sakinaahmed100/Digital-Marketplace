@@ -1,0 +1,33 @@
+.stepsSection {
+    padding: 4rem 0;
+    background-color: #ffffff;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .stepsCards {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .card {
+    background-color: #f1f1f1;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card p {
+    font-size: 1.2rem;
+  }
+  

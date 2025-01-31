@@ -23,12 +23,28 @@ export const signupUser = async (userData: { name: string; email: string; passwo
   }
 };
 
-
 export interface LoginResponse {
   access: string;
   refresh: string;
+  role: string;
 }
 
+export const login = async (email: string, password: string): Promise<LoginResponse> => {
+  try {
+    const response = await axios.post<LoginResponse>(`${API_URL}/login`, {
+      email,
+      password,
+    });
+
+    if (!response.data || !response.data.access || !response.data.role) {
+      throw new Error("Invalid login response.");
+    }
+
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || "Invalid credentials.");
+  }
+};
 
 
 export const refreshAccessToken = async (refreshToken: string): Promise<LoginResponse> => {
@@ -36,25 +52,3 @@ export const refreshAccessToken = async (refreshToken: string): Promise<LoginRes
   return response.data;
 };
 
-
-
-// src/services/authService.ts
-export const login = async (email: string, password: string) => {
-  try {
-    const response = await fetch("http://localhost:8000/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Invalid credentials. Please try again.");
-    }
-
-    return await response.json();
-  } catch (error) {
-    throw error;
-  }
-};
